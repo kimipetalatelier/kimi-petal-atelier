@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Manager | Kimi's Petal Atelier</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        .admin-container {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+        }
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--color-bg);
+            padding-bottom: 1rem;
+        }
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .admin-table th, .admin-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+        .admin-table th {
+            background-color: var(--color-bg);
+            color: var(--color-primary-dark);
+        }
+        .stock-input {
+            width: 80px;
+            padding: 0.5rem;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+        }
+        .admin-actions {
+            position: sticky;
+            bottom: 0;
+            background: white;
+            padding: 1.5rem 0;
+            border-top: 2px solid var(--color-bg);
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .status-oos { background: #fee2e2; color: #dc2626; }
+        .status-low { background: #fef3c7; color: #d97706; }
+        .status-ok { background: #dcfce7; color: #16a34a; }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <div>
+                <h1>Stock Manager</h1>
+                <p>Manage inventory levels for Kimi's Petal Atelier</p>
+            </div>
+            <div style="display: flex; gap: 1rem;">
+                <button id="reset-btn" class="btn btn-secondary" style="border-color: #dc3545; color: #dc3545;">Reset All to 0</button>
+                <a href="index.html" class="btn btn-secondary">View Shop</a>
+            </div>
+        </div>
+
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Variety Name</th>
+                    <th>Category</th>
+                    <th>Current Stock</th>
+                    <th>Status</th>
+                    <th>New Stock</th>
+                </tr>
+            </thead>
+            <tbody id="admin-product-list">
+                <!-- Products will be injected here -->
+            </tbody>
+        </table>
+
+        <div class="admin-actions">
+            <button id="save-inventory-btn" class="btn btn-primary">Save Changes</button>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="script.js"></script>
+    <script>
+        // Use the products array from script.js
+        const adminProductList = document.getElementById('admin-product-list');
+        const saveBtn = document.getElementById('save-inventory-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const toast = document.getElementById('toast');
+
+        function showAdminToast(msg) {
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        function renderAdminTable() {
+            // Re-initialize inventory to get latest stock from localStorage
+            const storedStock = JSON.parse(localStorage.getItem('kimi_atelier_inventory') || '{}');
+            
+            adminProductList.innerHTML = products.map(p => {
+                const stock = storedStock[p.id] !== undefined ? storedStock[p.id] : 0;
+                let statusClass = 'status-ok';
+                let statusText = 'In Stock';
+                
+                if (stock === 0) {
+                    statusClass = 'status-oos';
+                    statusText = 'Sold Out';
+                } else if (stock <= 3) {
+                    statusClass = 'status-low';
+                    statusText = 'Low Stock';
+                }
+
+                return `
+                    <tr>
+                        <td><strong>${p.name}</strong></td>
+                        <td>${p.category}</td>
+                        <td>${stock}</td>
+                        <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                        <td><input type="number" class="stock-input" data-id="${p.id}" value="${stock}" min="0"></td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        saveBtn.addEventListener('click', () => {
+            const inputs = document.querySelectorAll('.stock-input');
+            const newStockMap = {};
+            
+            inputs.forEach(input => {
+                newStockMap[input.dataset.id] = parseInt(input.value) || 0;
+            });
+
+            localStorage.setItem('kimi_atelier_inventory', JSON.stringify(newStockMap));
+            showAdminToast('Inventory updated successfully! 🌸');
+            renderAdminTable();
+        });
+
+        resetBtn.addEventListener('click', () => {
+            if(confirm('Are you sure you want to reset ALL stock to 0?')) {
+                const inputs = document.querySelectorAll('.stock-input');
+                inputs.forEach(input => input.value = 0);
+                saveBtn.click();
+            }
+        });
+
+        // Initial render
+        document.addEventListener('DOMContentLoaded', renderAdminTable);
+    </script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kimi's Petal Atelier | Premium Tuber Sales</title>
+    <meta name="description" content="Shop premium, field-grown dahlia tubers for your garden. Beautiful varieties including Cafe au Lait, Labyrinth, and more.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Kimi's Petal Atelier</a>
+            <div class="nav-links">
+                <a href="#shop">Shop Tubers</a>
+                <a href="#faq">FAQ</a>
+                <a href="#about">About</a>
+                <a href="#growing">Growing Guide</a>
+            </div>
+            <div class="nav-icons">
+                <div class="wishlist-toggle" aria-label="Wishlist">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                    <span class="wishlist-count">0</span>
+                </div>
+            <button class="cart-toggle" aria-label="Open Cart">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                <span class="cart-count">0</span>
+            </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Kimi's Petal Atelier</h1>
+            <p>Premium, hand-selected dahlia tubers grown with care for your summer garden.</p>
+            <a href="#shop" class="btn btn-primary">Shop the Collection</a>
+        </div>
+    </header>
+
+    <!-- Shop Section -->
+    <section id="shop" class="shop-section">
+        <div class="shipping-banner">
+            <strong>⚠️ Weather & Shipping Notice:</strong> Dahlia tubers cannot handle freezing temperatures. Please only order if the threat of frost has passed in your zone. We begin shipping in mid-April.
+        </div>
+        <div class="section-header">
+            <h2>The Spring Collection</h2>
+            <p>Discover our favorite varieties for the upcoming season. Tubers ship in April.</p>
+        </div>
+        
+        <div class="shop-controls">
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Search varieties...">
+            </div>
+            <div class="filter-group">
+                <button class="filter-btn active" data-filter="All">All</button>
+                <button class="filter-btn" data-filter="Favorites">❤️ Favorites</button>
+            </div>
+            <div class="sort-box">
+                <select id="sort-select">
+                    <option value="default">Sort by: Default</option>
+                    <option value="price-asc">Price: Low to High</option>
+                    <option value="price-desc">Price: High to Low</option>
+                    <option value="name-asc">Name: A-Z</option>
+                    <option value="name-desc">Name: Z-A</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="product-grid" id="product-grid">
+            <!-- Products will be injected here via JS -->
+        </div>
+
+        <div class="show-more-container" id="show-more-container">
+            <button id="show-more-btn" class="btn btn-secondary">Explore More Varieties</button>
+        </div>
+    </section>
+
+    <!-- About Snippet -->
+    <section id="about" class="about-section">
+        <div class="about-content">
+            <h2>Grown with Love</h2>
+            <p>I am a passionate hobby grower completely in love with dahlias. Every tuber sold here comes from my personal garden. To ensure the highest quality and prevent the spread of disease, I utilize strict sanitization practices, including a 10% bleach soak for all my cutting tools.</p>
+        </div>
+    </section>
+
+
+
+    <!-- Growing Guide Section -->
+    <section id="growing" class="growing-section">
+        <div class="growing-content">
+            <h2>Growing Guide</h2>
+            <p class="guide-intro">Follow these essential tips to ensure your dahlias thrive all summer long:</p>
+            <div class="growing-grid">
+                <div class="guide-card">
+                    <h3>☀️ Site & Soil</h3>
+                    <p>Plant in full sun (6-8 hours daily) after the last frost when soil is at least 60°F. Ensure the soil is well-draining to prevent tuber rot.</p>
+                </div>
+                <div class="guide-card">
+                    <h3>🌱 Planting</h3>
+                    <p>Dig a hole 4-6 inches deep. Place the tuber horizontally with the eye facing up. <strong>Do not water</strong> immediately after planting until green shoots appear.</p>
+                </div>
+                <div class="guide-card">
+                    <h3>✂️ Maintenance</h3>
+                    <p>Pinch the center stem when the plant reaches 12 inches tall to encourage branching. Stake tall varieties early to prevent them from snapping under the weight of the blooms.</p>
+                </div>
+                <div class="guide-card">
+                    <h3>🌸 Deadheading</h3>
+                    <p>Regularly snip off spent blooms. This redirects the plant's energy into producing more beautiful flowers all season long.</p>
+                </div>
+                <div class="guide-card">
+                    <h3>❄️ Winter Storage</h3>
+                    <p>Dahlias are tender. After the first frost, carefully dig up the tubers, gently wash them, and let them dry. Store them in a dark location between 40°F and 50°F to keep them perfectly dormant over winter.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq-section">
+        <div class="faq-container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Everything you need to know about our tuber sales and shipping.</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>📦 When will my tubers ship?</h3>
+                    <p>We begin shipping in mid-April once temperatures are safe. <strong>Please note:</strong> We currently only ship to the Continental USA (excluding Alaska and Hawaii).</p>
+                </div>
+                <div class="faq-item">
+                    <h3>✅ Do you guarantee your tubers?</h3>
+                    <p>Yes. We guarantee that all tubers shipped will have at least one visible eye. If you have any concerns upon arrival, please contact us within 7 days of delivery.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>🛍️ Can I add to my order after it's placed?</h3>
+                    <p>To ensure shipping efficiency, we cannot combine orders or add items once an order is finalized. Please double-check your cart before checking out!</p>
+                </div>
+                <div class="faq-item">
+                    <h3>🌡️ How should I store them if I'm not ready to plant?</h3>
+                    <p>If your tubers arrive before your soil is warm enough (60°F), store them in a cool, dark, and dry place (40-50°F). Do not refrigerate or allow them to freeze.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="newsletter-content">
+            <h2>Kimi's Atelier Insider</h2>
+            <p>Join our mailing list to receive exclusive updates on seasonal tuber drops and growing tips.</p>
+            <form id="newsletter-form" class="newsletter-form">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit" class="btn btn-primary">Join the Atelier</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>Kimi's Petal Atelier</h3>
+                <p>Bringing breathtaking blooms to gardens everywhere.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="#">Shop</a>
+                <a href="#">FAQ</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-col">
+                <h4>Follow Us</h4>
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+            </div>
+            <div class="footer-col">
+                <h4>Admin</h4>
+                <a href="admin.html">Stock Manager</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Kimi's Petal Atelier. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-modal" id="cart-modal">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="close-cart" aria-label="Close Cart">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items will be injected here -->
+            <div class="empty-cart-msg">Your cart is empty.</div>
+        </div>
+        <div class="cart-footer" id="cart-footer">
+            <div class="cart-total">
+                <span>Total</span>
+                <span id="cart-total-price">$0.00</span>
+            </div>
+            <button class="btn btn-primary btn-block checkout-btn" id="checkout-btn">Checkout</button>
+        </div>
+        <div class="checkout-form-container hidden" id="checkout-form-container">
+            <div class="checkout-header">
+                <h3>Secure Checkout</h3>
+                <p>Complete your purchase using our secure payment partner.</p>
+            </div>
+            
+            <!-- Stripe Embedded Checkout Mount Point -->
+            <div id="checkout">
+                <div class="checkout-loading">Initializing secure checkout...</div>
+            </div>
+
+            <button type="button" class="btn btn-block back-to-cart-btn" id="back-to-cart-btn">Back to Cart</button>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast">Item added to cart!</div>
+
+    <!-- Quick View Modal -->
+    <div class="quick-view-modal" id="quick-view-modal">
+        <div class="qv-overlay"></div>
+        <div class="qv-content">
+            <button class="close-qv" aria-label="Close Quick View">&times;</button>
+            <div class="qv-body">
+                <div class="qv-image">
+                    <img id="qv-img" src="" alt="">
+                </div>
+                <div class="qv-details">
+                    <span id="qv-category" class="product-category"></span>
+                    <h2 id="qv-title"></h2>
+                    <div id="qv-meta" class="product-meta"></div>
+                    <p id="qv-description" class="qv-description"></p>
+                    <span id="qv-price" class="product-price"></span>
+                    <button id="qv-add-btn" class="btn btn-primary btn-block">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Backdrop -->
+    <div class="cart-backdrop" id="cart-backdrop"></div>
+
+    <!-- Stripe -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="script.js"></script>
+</body>
+</html>

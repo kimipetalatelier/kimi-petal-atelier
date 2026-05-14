@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You | Kimi's Petal Atelier</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        .success-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--color-bg);
+        }
+        .success-card {
+            background: white;
+            padding: 4rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+            max-width: 600px;
+            animation: fadeIn 1s ease-out;
+        }
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+        }
+        h1 { margin-bottom: 1.5rem; }
+        p { margin-bottom: 2rem; color: var(--color-text-light); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="success-card">
+            <div class="success-icon">🌸</div>
+            <h1>Order Confirmed</h1>
+            <p>Thank you for cultivating beauty with us! Your dahlia tubers will be carefully prepared for shipment in mid-April. You will receive a confirmation email shortly.</p>
+            <a href="index.html" class="btn btn-primary">Return to Shop</a>
+        </div>
+    </div>
+
+    <script>
+        // On success, we need to clear the cart in localStorage
+        // Note: In a real app, stock reduction would happen via Webhooks.
+        // For this demo, we'll clear the cart here.
+        localStorage.removeItem('kimi_atelier_cart'); 
+    </script>
+</body>
+</html>

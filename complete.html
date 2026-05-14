@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Complete | Kimi's Petal Atelier</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .complete-container {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            background-color: var(--bg-soft);
+        }
+        .status-card {
+            background: white;
+            padding: 60px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+        .status-icon {
+            font-size: 64px;
+            margin-bottom: 24px;
+            display: block;
+        }
+        .status-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 36px;
+            margin-bottom: 16px;
+            color: var(--primary-color);
+        }
+        .status-text {
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+        #order-details {
+            margin-bottom: 32px;
+            padding: 20px;
+            background: var(--bg-soft);
+            border-radius: 12px;
+            text-align: left;
+            font-size: 14px;
+        }
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border-color);
+            border-top: 3px solid var(--accent-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar scrolled">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Kimi's Petal Atelier</a>
+        </div>
+    </nav>
+
+    <div class="complete-container">
+        <div class="status-card" id="status-card">
+            <div id="loading">
+                <div class="loading-spinner"></div>
+                <p>Verifying your order status...</p>
+            </div>
+
+            <div id="success" class="hidden">
+                <span class="status-icon">🌸</span>
+                <h1 class="status-title">Thank you for your order!</h1>
+                <p class="status-text">We've received your request. A confirmation email has been sent to <strong id="customer-email"></strong>. We'll notify you as soon as your tubers are ready to ship in April.</p>
+                <div id="order-details">
+                    <strong>Payment ID:</strong> <span id="payment-id"></span><br>
+                    <strong>Status:</strong> Completed Successfully
+                </div>
+                <a href="index.html" class="btn btn-primary">Return to Shop</a>
+            </div>
+
+            <div id="error" class="hidden">
+                <span class="status-icon">⚠️</span>
+                <h1 class="status-title">Something went wrong</h1>
+                <p class="status-text">We couldn't verify your payment status. Please check your email for a confirmation or contact our support team.</p>
+                <a href="index.html" class="btn btn-primary">Back to Shop</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function checkStatus() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sessionId = urlParams.get('session_id');
+
+            if (!sessionId) {
+                showError();
+                return;
+            }
+
+            try {
+                const response = await fetch(`/session-status?session_id=${sessionId}`);
+                const session = await response.json();
+
+                if (session.status === 'open') {
+                    // Still in progress, maybe refresh?
+                    window.location.replace('index.html');
+                } else if (session.status === 'complete') {
+                    showSuccess(session);
+                } else {
+                    showError();
+                }
+            } catch (e) {
+                console.error(e);
+                showError();
+            }
+        }
+
+        function showSuccess(session) {
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('success').classList.remove('hidden');
+            document.getElementById('customer-email').textContent = session.customer_email || 'your inbox';
+            document.getElementById('payment-id').textContent = session.payment_intent_id || 'N/A';
+        }
+
+        function showError() {
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('error').classList.remove('hidden');
+        }
+
+        checkStatus();
+    </script>
+</body>
+</html>
