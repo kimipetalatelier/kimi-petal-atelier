@@ -33,11 +33,10 @@ app.post('/create-checkout-session', async (req, res) => {
         });
 
         const session = await stripe.checkout.sessions.create({
-            ui_mode: 'elements',
+            ui_mode: 'embedded',
             line_items: lineItems,
             mode: 'payment',
             return_url: `${process.env.COMPLETE_URL}?session_id={CHECKOUT_SESSION_ID}`,
-            automatic_tax: { enabled: true },
         });
 
         res.json({ clientSecret: session.client_secret });
