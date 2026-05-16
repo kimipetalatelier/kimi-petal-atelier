@@ -100,6 +100,19 @@
 
     <script src="script.js"></script>
     <script>
+        // Simple password protection
+        const ADMIN_PASSWORD = 'Oliver2204'; // Your secret code
+        
+        function checkPassword() {
+            const pass = prompt('Please enter the Admin Password to access the Stock Manager:');
+            if (pass !== ADMIN_PASSWORD) {
+                alert('Access Denied.');
+                window.location.href = 'index.html';
+                return false;
+            }
+            return true;
+        }
+
         // Use the products array from script.js
         const adminProductList = document.getElementById('admin-product-list');
         const saveBtn = document.getElementById('save-inventory-btn');
@@ -113,6 +126,8 @@
         }
 
         function renderAdminTable() {
+            if (!checkPassword()) return; // Lock the table behind the password
+
             // Re-initialize inventory to get latest stock from localStorage
             const storedStock = JSON.parse(localStorage.getItem('kimi_atelier_inventory') || '{}');
             
