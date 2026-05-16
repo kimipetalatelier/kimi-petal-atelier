@@ -1145,7 +1145,7 @@ function showToast(message) {
 }
 
 // Initialize Stripe
-const stripe = Stripe('pk_test_51TWtiz09lX1N2JOFA7V9fI6R3wE8Z4M9L1pQ0S2xY5hJ7kG3vD6nC8mB4xN2vW1z0aB9cX7eY5dZ3wV1uT9sR7qP5oM3k'); 
+const stripe = Stripe('pk_live_51TWtip0IefA5nqWsTuWwyDtEQ27i2SQHJ85hjhoWZC9PM46D9sW4qV2HGtMlrIqJZKbJMPtuPKg21wPMQC5kxpLl00GcHwBLYQ');
 let checkout;
 
 async function initializeCheckout() {
@@ -1177,7 +1177,7 @@ function setupEventListeners() {
     if (wishlistToggle) {
         wishlistToggle.addEventListener('click', () => {
             currentFilter = 'Favorites';
-            
+
             // Update UI buttons
             filterBtns.forEach(btn => {
                 btn.classList.remove('active');
@@ -1185,9 +1185,9 @@ function setupEventListeners() {
                     btn.classList.add('active');
                 }
             });
-            
+
             renderProducts();
-            
+
             // Scroll to shop
             const shopSection = document.getElementById('shop');
             if (shopSection) {
